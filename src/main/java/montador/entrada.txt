@@ -1,0 +1,22 @@
+Inicio:
+mov AX, '9' 
+mov NOVE, AX
+sub AX,Um
+mov Oito,AX
+sub AX,Um
+mov Sete,AX
+sub AX,Um
+mov Seis,AX
+sub AX,Um
+mov Cinco,AX
+sub AX,Um
+mov Tres,AX
+subAX,Um
+mov Dois,AX
+mov AX,AsczERO
+mov ZERO,AX
+hlt
+
+AscZero EQU '0'
+Um EQU 1
+END Inicio
