@@ -11,13 +11,16 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author kevin
  */
 public class tela extends javax.swing.JFrame {
-
+    
+    public static String ArquivoCarregado = new String("") ;
+    protected static DefaultListModel<String> listIntermediarioModel = new DefaultListModel<>();
     /**
      * Creates new form tela
      */
@@ -46,7 +49,7 @@ public class tela extends javax.swing.JFrame {
         codigoFonteLabel = new javax.swing.JLabel();
         codigoFonteLabel1 = new javax.swing.JLabel();
         codigoFonteLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        carregarArquivoButton = new javax.swing.JButton();
         ButtonsegundaPassagem = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jListSegmentos = new javax.swing.JList<>();
@@ -91,10 +94,10 @@ public class tela extends javax.swing.JFrame {
         codigoFonteLabel2.setText("Código Fonte");
         codigoFonteLabel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton1.setText("Carregar arquivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        carregarArquivoButton.setText("Carregar arquivo");
+        carregarArquivoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                carregarArquivoButtonActionPerformed(evt);
             }
         });
 
@@ -140,7 +143,7 @@ public class tela extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(codigoFonteLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(carregarArquivoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ButtonsegundaPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +192,7 @@ public class tela extends javax.swing.JFrame {
                             .addComponent(jScrollPane5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(carregarArquivoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ButtonPrimeiraPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -200,27 +203,23 @@ public class tela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String ArquivoCarregado = new String("") ;
-        String linha =new String();
-        System.out.println("teste = " + System.getProperty("user.dir"));
+    private void carregarArquivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregarArquivoButtonActionPerformed
+        
+        String linha = new String();
+        //System.out.println("teste = " + System.getProperty("user.dir"));
         String CaminhoDoArquivo = new String(System.getProperty("user.dir")+"/src/main/java/montador/entrada.txt");
         BufferedReader buffRead; //reader do arquivo
         
     
         try {
-            
-            
             buffRead = new BufferedReader(new FileReader(CaminhoDoArquivo));
                   
             linha = buffRead.readLine();
             while (linha!=null) {                
-                ArquivoCarregado=ArquivoCarregado.concat(linha+"\n");
+                ArquivoCarregado = ArquivoCarregado.concat(linha+"\n");
                 linha= buffRead.readLine();
             }
             jTextArea.setText(ArquivoCarregado);
-
-            
 
             buffRead.close();
         } catch (FileNotFoundException ex) {
@@ -228,14 +227,21 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_carregarArquivoButtonActionPerformed
 
     private void ButtonsegundaPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonsegundaPassagemActionPerformed
         
+            
     }//GEN-LAST:event_ButtonsegundaPassagemActionPerformed
 
     private void ButtonPrimeiraPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPrimeiraPassagemActionPerformed
-        // TODO add your handling code here:
+        try{
+            montador.primeira_passagem();
+            System.out.println("Button actioned ");
+            jListIntermediario.setModel(listIntermediarioModel);
+        } catch(IOException e){ 
+            System.out.println("Erro 404: " + e.getMessage());
+        }
     }//GEN-LAST:event_ButtonPrimeiraPassagemActionPerformed
 
     /**
@@ -276,12 +282,12 @@ public class tela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonPrimeiraPassagem;
     private javax.swing.JButton ButtonsegundaPassagem;
+    private javax.swing.JButton carregarArquivoButton;
     private javax.swing.JLabel codigoFonteLabel;
     private javax.swing.JLabel codigoFonteLabel1;
     private javax.swing.JLabel codigoFonteLabel2;
     private javax.swing.JLabel codigoFonteLabel3;
     private javax.swing.JLabel codigoFonteLabel4;
-    private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jListIntermediario;
     private javax.swing.JList<String> jListSaida;
