@@ -11,6 +11,9 @@ public class Simbolo {
     private String type;
     private boolean definition;
 
+    public Simbolo(){
+        
+    }
     public Simbolo(String value, String type, boolean definition){
         
         this.value = value;
@@ -23,10 +26,10 @@ public class Simbolo {
     }
 
     public void setValue(String value) {
-        if(type.equals("Const")){
+        if(type.equals("EQU")){
             this.value = value;
         }else{
-            System.out.println("Not permited chenges");
+            System.out.println("Not permited changes");
         }
        
     }
