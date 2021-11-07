@@ -1,22 +1,48 @@
-Inicio:
-mov AX, '9' 
-mov NOVE, AX
-sub AX,Um
-mov Oito,AX
-sub AX,Um
-mov Sete,AX
-sub AX,Um
-mov Seis,AX
-sub AX,Um
-mov Cinco,AX
-sub AX,Um
-mov Tres,AX
-subAX,Um
-mov Dois,AX
-mov AX,AsczERO
-mov ZERO,AX
-hlt
+var1 DW 111
+var2 DW 222
+var3 DW 333
+var4 DW 444
+var5 EQU 555
+var6 EQU 666
+var7 EQU 777
+var8 DW 888
 
-AscZero EQU '0'
-Um EQU 1
-END Inicio
+add AX,AX
+add AX,DX
+add AX,var1
+div SI
+div AX
+sub AX,AX
+sub AX,DX
+sub AX,var2
+mul SI
+mul AX
+cmp AX,DX
+cmp AX,var3
+and AX,DX
+and AX,var4
+not AX
+or AX,AX
+or AX,DX
+or AX,var5
+xor AX,AX
+xor AX,DX
+xor AX,var6
+jmp label
+jz label
+jnz label
+jp label
+call label
+ret
+pop AX
+pop DX
+popf
+pop label
+push AX
+push DX
+pushf
+store AX
+store DX
+read var7
+write AX,var8
+hlt
